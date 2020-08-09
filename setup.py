@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='cbiprep',
-    version='0.1.7',
+    version='0.1.9',
     description='CBI Prep',
     author='Ryuichiro Hara',
     author_email='hara.ryuichiro@gmail.com',
@@ -15,6 +15,9 @@ setup(
         ('cbiprep/data', glob.glob('data/*')),
     ],
     entry_points={
+        'console_scripts': [
+            'ligand_center = cbiprep.ligand_center:main',
+        ]
     },
     classifiers=[
         'Programming Language :: Python :: 3.7',
