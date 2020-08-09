@@ -1,4 +1,4 @@
-import Chem
+from rdkit import Chem
 import numpy as np
 
 
