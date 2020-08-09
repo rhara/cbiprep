@@ -1,5 +1,6 @@
 ```
-pip install cbiprep-X.Y.Z.tar.gz
+python setup.py sdist
+pip install dist/cbiprep-X.Y.Z.tar.gz
 
 python -m cbiprep.pdbbind_index
 python -m cbiprep.pdbdl
