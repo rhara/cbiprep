@@ -1,0 +1,12 @@
+/pdb/
+/test/
+/dist/
+/build/
+/work/
+/.dump/
+/index_2019.pkl.gz
+.ipynb_checkpoints/
+*.egg-info/
+/pocket.pdb
+/.idea/
+__pycache__/

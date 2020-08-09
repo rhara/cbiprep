@@ -1,0 +1,122 @@
+NAME
+    Flare - a structure-based design application
+
+SYNOPSIS
+     Flare
+     Flare [options] Flare_project.flr
+     Flare [options] [import options] molecule_file [[import options] molecule_file_2...]
+
+DESCRIPTION
+    Flare is a structure-based design tool for drug discovery. It provides a
+    suite of methods for understanding protein-ligand interactions,
+    including protein electrostatic potentials, docking, 3D RISM and
+    WaterSwap.
+
+  Input
+    The input molecules can be read in PDB, SDF, mol2, or XED format. The
+    input format should be autodetected. Import options specified will apply
+    to all subsequent molecules until more options are specified. These new
+    options will then apply to the next set of molecules. This way, it is
+    possible for each molecule to have its own input options. Instead of
+    loading individual input molecules, a Flare project file can instead be
+    provided.
+
+OPTIONS
+  IMPORT OPTIONS
+    -c, --charge yes|no|ask|prep
+         Determines whether to re-assign the protonation state of molecules.
+         If 'y'es, molecules are charged for pH7. 'n'o leaves molecules
+         unchanged, using the input protonation state. 'p'rep opens a
+         protein prep dialog once the application has started. 'a'sk is the
+         default value. The first letter of each argument can be used as a
+         shortcut.
+
+    -m, --read-mode auto|protein|ligand
+         Read the input molecules as 'p'roteins or 'l'igands. The default
+         behaviour is to 'a'utomatically detect the molecule type. Ligands
+         that are read as proteins will be inserted into the protein view.
+         The first letter of each argument can be used as a shortcut.
+
+    -r, --role rolename,description
+         Specify a custom role to import molecules in to. Subsequent
+         molecules will all be added to this role. The description is
+         optional. This option only takes effect when the read mode is
+         'ligand' or it is 'auto' and the type is detected as ligand.
+
+  GENERAL OPTIONS
+    --disable-python
+         Disables the Python integration.
+
+    --export-preferences file.ini
+         Exports the preferences to the file.
+
+    --import-preferences file.ini
+         Imports the preferences from the file.
+
+    -h, --help
+         Print short help text.
+
+    -H, --extendedhelp
+         Print extended help text.
+
+    -V, --version
+         Print version information and license availability.
+
+EXAMPLES
+      Flare my_project.flr
+
+    Opens the project in 'my_project.flr'
+
+      Flare -c y -m auto -r "Myrole,My custom role" mols.sdf
+
+    Imports the contents of 'mols.sdf' in to a new 'Myrole' role, recharging
+    all molecules and autodetecting whether entries are ligand or proteins.
+
+ENVIRONMENT
+    CRESSET_BROKER
+        Set the location of the Cresset Engine Broker in the format
+        hostname:port. This can be overridden in the preferences.
+
+    Flare is licensed using the RLM licence manager. See the RLM
+    documentation at <http://www.reprisesoftware.com/> for environment
+    variables affecting licensing.
+
+SEE ALSO
+    FieldEngine, pyflare
+
+COPYRIGHT
+    Flare is Copyright 2003-2019 Cresset Biomolecular Discovery Ltd. Flare
+    is commercial software and may only be used under license.
+
+    The Qt Toolkit is Copyright (C) 2016 The Qt Company Ltd. and other
+    contributors. The Qt Toolkit and extensions are used under the terms of
+    the LGPL version 3.
+
+    The pthread library, OpenMM, and the Adaptagrams COLA libraries in this
+    software are used under the terms of the LGPL version 2.1.
+
+    The RDKit <http://www.rdkit.org> is used in this software.
+
+    License agreement information for all third party software used in this
+    application can be found in the documentation subdirectory of the
+    installation directory and at
+    <https://www.cresset-group.com/products/third-party-licenses>.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
