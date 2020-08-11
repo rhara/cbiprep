@@ -8,10 +8,11 @@ class AtomTyper:
     C N O F P S Cl Br other
     """
     MAP = {6:1, 7:2, 8:3, 9:4, 15:5, 16:6, 17:7, 35:8}
+    MAX = 9
 
     def get_atomtype(self, atom):
         an = atom.GetAtomicNum()
-        return self.MAP.get(an, 9)
+        return self.MAP.get(an, self.MAX)
     
     def __call__(self, mol):
         return np.array([self.get_atomtype(atom) for atom in mol.GetAtoms()])
@@ -24,6 +25,7 @@ class HybAtomTyper(AtomTyper):
     """
     MAP = {(6,3):1, (6,2):2, (6,1):3, (6,5):4, (7,3):5, (7,2):6, (7,1):7, (7,5):8, (8,3):9, (8,2):10, (8,5):11,
            (9,1):12, (15,0):13, (16,3):14, (16,2):15, (16,5):16, (17,1):17}
+    MAX = 18
 
     def get_atomtype(self, atom):
         an = atom.GetAtomicNum()
@@ -34,4 +36,4 @@ class HybAtomTyper(AtomTyper):
             typ = 5
         if an == 15:
            typ = 0
-        return self.MAP.get((an, typ), 18)
+        return self.MAP.get((an, typ), self.MAX)
