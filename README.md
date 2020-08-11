@@ -1,6 +1,11 @@
 ### update the local repository
 
 ```
+ver 0.1.14 test_smina.ipynb smina function to go through all PDBs
+                            RMSD is written out
+```
+
+```
 git clone
 ```
 
