@@ -10,6 +10,7 @@ For the time being, please use Jupyter notebooks.
 ```
 ver 0.1.20  SminaSelfDocking.ipynb      - small changes
 ver 0.1.19  cbiprep/smina.py            - small changes
+                                        - test_smina.ipynb no longer works, so deleted
 ver 0.1.18  papers/                     - collection of publications
 ver 0.1.17  SminaSelfDocking.ipynb      - newly added
 ver 0.1.16  cbiprep/matrix.py           - newly added
