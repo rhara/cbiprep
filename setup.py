@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='cbiprep',
-    version='0.1.17',
+    version='0.1.18',
     description='CBI Prep',
     author='Ryuichiro Hara',
     author_email='hara.ryuichiro@gmail.com',
