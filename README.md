@@ -1,6 +1,7 @@
 ### LOG
 
 ```
+ver 0.1.17  SminaSelfDocking.ipynb      - newly added
 ver 0.1.16  cbiprep/matrix.py           - newly added
             DataSet.ipynb               - newly added
             cbiprep/pdbatoms.py         - remove NMR Hs and altLoc
