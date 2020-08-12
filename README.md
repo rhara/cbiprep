@@ -1,3 +1,8 @@
+### TODO
+
+There is a problem in ligand extraction where a chain has multiple ligand with separate sequence numbers.<br/>
+Ligand must be split by (chain, sequence number) identity.
+
 ### LOG
 
 ```
