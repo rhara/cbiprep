@@ -1,6 +1,7 @@
 ### LOG
 
 ```
+ver 0.1.19  cbiprep/smina.py            - small changes
 ver 0.1.18  papers/                     - collection of publications
 ver 0.1.17  SminaSelfDocking.ipynb      - newly added
 ver 0.1.16  cbiprep/matrix.py           - newly added

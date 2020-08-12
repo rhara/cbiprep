@@ -36,8 +36,8 @@ def RunSmina(pdb_code, ligand_name, ncpu=0, workdir='work', num_modes=4, seed=0)
     
     boxpars = sp.check_output(f'ligand_center {ligand_sdf}', shell=True).decode().strip()
     
-    docked_sdf = f'{workdir}/{pdb_code}/{pdb_code}_ligand_{ligand_name}_docked.sdf'
-    smina_log = f'work/{pdb_code}/{pdb_code}_ligand_{ligand_name}_smina.log'
+    docked_sdf = f'{workdir}/{pdb_code}/{pdb_code}_{ligand_name}_docked.sdf'
+    smina_log = f'work/{pdb_code}/{pdb_code}_{ligand_name}_smina.log'
     command = f'smina -r {fixed_receptor} -l {ligand_sdf} {boxpars} --cpu {ncpu} --num_modes {num_modes} --seed {seed} -o {docked_sdf} --log {smina_log}'
     print(command)
     sp.call(command, shell=True)
