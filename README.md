@@ -1,6 +1,9 @@
 ### LOG
 
 ```
+ver 0.1.16  cbiprep/matrix.py           - newly added
+            DataSet.ipynb               - newly added
+            cbiprep/pdbatoms.py         - remove NMR Hs and altLoc
 ver 0.1.15                              - fixed in general
 ver 0.1.14  test_smina.ipynb            - smina function to go through all PDBs
 |                                       - RMSD is written out

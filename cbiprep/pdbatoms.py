@@ -45,6 +45,10 @@ class PDBAtoms(list):
                 kw['tempFactor'] = float(line[60:66])
                 kw['element'] = line[76:78]
                 kw['charge'] = line[78:80]
+                if kw['altLoc'] not in [' ', 'A']:
+                    continue
+                if kw['element'].strip() == 'H':
+                    continue
                 self.append(PDBAtom(kw))
     
     def __str__(self):

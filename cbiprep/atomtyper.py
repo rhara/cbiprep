@@ -37,3 +37,14 @@ class HybAtomTyper(AtomTyper):
         if an == 15:
            typ = 0
         return self.MAP.get((an, typ), self.MAX)
+
+
+def GetAtomVector(ligand_mol, pocket_atoms, ligand_thres=50, pocket_thres=400, atomtyper=HybAtomTyper):
+    atomtyper = atomtyper()
+    ligand_types = atomtyper(ligand_mol)
+    pocket_mol = Chem.MolFromPDBBlock(str(pocket_atoms))
+    pocket_types = atomtyper(pocket_mol)
+    types_vec = np.zeros(ligand_thres + pocket_thres, dtype=int)
+    types_vec[0:ligand_mol.GetNumAtoms()] = ligand_types
+    types_vec[ligand_thres:ligand_thres + len(pocket_atoms)] = pocket_types
+    return types_vec
