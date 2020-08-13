@@ -5,6 +5,7 @@ For the time being, please use Jupyter notebooks.
 ### LOG
 
 ```
+ver 0.1.26  Maserati.ipynb              - output is compact tarball
 ver 0.1.25  notebooks                   - slightly modified
             cbiprep/pdbatoms.py         - PDBAtoms::GetResFragment method added
 ver 0.1.24  notebooks                   - modified for Hasegawa selection
