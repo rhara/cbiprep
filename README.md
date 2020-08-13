@@ -5,9 +5,9 @@ For the time being, please use Jupyter notebooks.
 ### LOG
 
 ```
-ver 0.1.24  Prep.ipynb                  - modified for Hasegawa selection
-            DataSet.ipynb               - 
-            Maserati.ipynb              - 
+ver 0.1.25  notebooks                   - slightly modified
+            cbiprep/pdbatoms.py         - PDBAtoms::GetResFragment method added
+ver 0.1.24  notebooks                   - modified for Hasegawa selection
 ver 0.1.23  Maserati.ipynb              - essentials added
 ver 0.1.22  Maserati.ipynb              - newly added, compile dataset from all the calculations
 ver 0.1.21  cbiprep/pdbatoms.py         - fixed for in-chain duplicated ligands

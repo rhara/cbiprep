@@ -62,6 +62,40 @@ class PDBAtoms(list):
     def __repr__(self):
         return self.__str__()
     
+    def __iadd__(self, other):
+        self.extend(other)
+        return self
+
+    def GetResFragment(self, seqs, fix_carboxylate=False):
+        chain_id = seqs[0][0]
+        res_seqs = []
+        for seq in seqs:
+            res_seqs.append(seq[1])
+        next_res_ns = []
+        last_res = []
+        frags = PDBAtoms()
+        for a in self:
+            if a['chainID'] == chain_id:
+                if a['resSeq'] in res_seqs:
+                    frags.append(a)
+                if a['resSeq'] == max(res_seqs):
+                    last_res.append(a)
+                if a['element'].strip() == 'N' and a['resSeq'] == max(res_seqs) + 1:
+                    next_res_ns.append(a)
+        if fix_carboxylate and len(next_res_ns) > 0:
+            for n in next_res_ns:
+                n_cord = np.array([n['x'],n['y'],n['z']])
+                for a in last_res:
+                    a_cord = np.array([a['x'],a['y'],a['z']])
+                    if np.abs(np.linalg.norm(n_cord - a_cord)) < 1.5:
+                        n['name'] = '  O'
+                        n['element'] = ' O'
+                        n['resName'] = a['resName']
+                        n['resSeq'] = a['resSeq']
+                        frags.append(n)
+                        break
+        return frags
+
     def get_ligand_names(self):
         names = set()
         for atom in self:
