@@ -62,6 +62,12 @@ class PDBAtoms(list):
     def __repr__(self):
         return self.__str__()
     
+    def __add__(self, other):
+        this = PDBAtoms()
+        this += self
+        this += other
+        return this
+
     def __iadd__(self, other):
         self.extend(other)
         return self
