@@ -20,11 +20,13 @@ class PDBAtoms(list):
     AMINO_ACIDS = 'ALA ARG ASN ASP ASX CYS GLU GLN GLX GLY HIS ILE LEU LYS MET PHE PRO SER THR TRP TYR VAL'.split()
 
     def __init__(self, pdb=None):
+        self.pdb_file = None
         list.__init__(self)
         if pdb:
             self.read_pdb(pdb)
 
     def read_pdb(self, pdb):
+        self.pdb_file = pdb
         openf = gzip.open if pdb.endswith('.gz') else open
         for line in openf(pdb, 'rt'):
             line = line.rstrip()
@@ -72,15 +74,17 @@ class PDBAtoms(list):
         return sorted(names)
     
     def get_ligand(self, name):
-        chains = set()
+        info = set()
         for atom in self:
             if atom['resName'] == name:
-                chains.add(atom['chainID'])
-
-        chains = sorted(chains)
+                info.add((atom['chainID'], atom['resSeq']))
+        if len(info) == 0:
+            return PDBAtoms()
+        info = sorted(info)
+        chainID, resSeq = info[0][0], info[0][1]
         ligand_atoms = PDBAtoms()
         for atom in self:
-            if atom['resName'] == name and atom['chainID'] == chains[0]:
+            if atom['resName'] == name and atom['chainID'] == chainID and atom['resSeq'] == resSeq:
                 ligand_atoms.append(atom)
         return ligand_atoms
     

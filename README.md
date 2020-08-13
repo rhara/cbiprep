@@ -1,13 +1,11 @@
 ### TODO
 
-There is a problem in ligand extraction where a chain has multiple ligand with separate sequence numbers.<br/>
-Ligand must be split by (chain, sequence number) identity.
-
 For the time being, please use Jupyter notebooks.
 
 ### LOG
 
 ```
+ver 0.1.21  cbiprep/pdbatoms.ipynb      - fixed for in-chain duplicated ligands
 ver 0.1.20  SminaSelfDocking.ipynb      - small changes
 ver 0.1.19  cbiprep/smina.py            - small changes
                                         - test_smina.ipynb no longer works, so deleted
