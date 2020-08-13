@@ -67,6 +67,10 @@ class PDBAtoms(list):
         return self
 
     def GetResFragment(self, seqs, fix_carboxylate=False):
+        """
+        written by Iino
+        # Needs review
+        """
         chain_id = seqs[0][0]
         res_seqs = []
         for seq in seqs:
