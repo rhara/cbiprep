@@ -5,9 +5,12 @@ For the time being, please use Jupyter notebooks.
 ### LOG
 
 ```
-ver 0.1.23  cbiprep/Maserati.ipynb      - essentials added
-ver 0.1.22  cbiprep/Maserati.ipynb      - newly added, compile dataset from all the calculations
-ver 0.1.21  cbiprep/pdbatoms.ipynb      - fixed for in-chain duplicated ligands
+ver 0.1.24  Prep.ipynb                  - modified for Hasegawa selection
+            DataSet.ipynb               - 
+            Maserati.ipynb              - 
+ver 0.1.23  Maserati.ipynb              - essentials added
+ver 0.1.22  Maserati.ipynb              - newly added, compile dataset from all the calculations
+ver 0.1.21  cbiprep/pdbatoms.py         - fixed for in-chain duplicated ligands
 ver 0.1.20  SminaSelfDocking.ipynb      - small changes
 ver 0.1.19  cbiprep/smina.py            - small changes
                                         - test_smina.ipynb no longer works, so deleted
