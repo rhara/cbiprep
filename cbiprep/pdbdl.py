@@ -30,8 +30,12 @@ def download_df_PDBs(df, dest='.', nprocs=0):
         nprocs = os.cpu_count()
 
     pool = Pool(nprocs)
+    ndownloaded = 0
     for par in pool.imap_unordered(__worker, __gen(df, dest)):
-        print(par, file=sys.stderr)
+        if par['downloaded']:
+            ndownloaded += 1
+            print(par)
+    return ndownloaded
 
 
 if __name__ == '__main__':
