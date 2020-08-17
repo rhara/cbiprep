@@ -19,13 +19,13 @@ class PDBAtom(dict):
 class PDBAtoms(list):
     AMINO_ACIDS = 'ALA ARG ASN ASP ASX CYS GLU GLN GLX GLY HIS ILE LEU LYS MET PHE PRO SER THR TRP TYR VAL'.split()
 
-    def __init__(self, pdb=None):
+    def __init__(self, pdb=None, removeWater=False, removeHet=False):
         self.pdb_file = None
         list.__init__(self)
         if pdb:
-            self.read_pdb(pdb)
+            self.read_from(pdb, removeWater=removeWater, removeHet=removeHet)
 
-    def read_pdb(self, pdb):
+    def read_from(self, pdb, removeWater=False, removeHet=False):
         self.pdb_file = pdb
         openf = gzip.open if pdb.endswith('.gz') else open
         for line in openf(pdb, 'rt'):
@@ -49,10 +49,31 @@ class PDBAtoms(list):
                 kw['charge'] = line[78:80]
                 if kw['altLoc'] not in [' ', 'A']:
                     continue
+                if removeWater and kw['resName'] == 'HOH':
+                    continue
+                if removeHet and kw['record'] == 'HETATM' and kw['resName'] != 'HOH':
+                    continue
                 if kw['element'].strip() == 'H':
                     continue
                 self.append(PDBAtom(kw))
     
+    def write_to(self, oname):
+        open(oname, 'wt').write(str(self))
+
+    def get_residues(self):
+        _chainID, _resSeq = None, None
+        for atom in self:
+            chainID, resSeq = atom['chainID'], atom['resSeq']
+            if _chainID is None and _resSeq is None:
+                stack = PDBAtoms()
+            elif (chainID, resSeq) != (_chainID, _resSeq):
+                yield stack
+                stack = PDBAtoms()
+            stack.append(atom)
+            _chainID, _resSeq = chainID, resSeq
+        yield stack
+
+
     def __str__(self):
         s = []
         for atom in self:
@@ -150,24 +171,41 @@ class PDBAtoms(list):
                 relevant_chain.add(p['chainID'])
         relevant_atoms = PDBAtoms()
         for atom in protein_atoms:
+            if atom['record'] == 'HETATM':
+                continue
             if atom['chainID'] in relevant_chain:
                 relevant_atoms.append(atom)
         return relevant_atoms
 
-    def get_pocket(self, ligand_atoms, thres=5.0):
-        protein_atoms = self.get_protein()
-        distance_matrix = protein_atoms.get_distance_matrix(ligand_atoms)
+    def get_pocket_inclusive(self, ligand_atoms, thres=5.0):
+        distance_matrix = self.get_distance_matrix(ligand_atoms)
         distance_mins = distance_matrix.min(axis=1)
         pocket_res = set()
         for i in range(len(distance_mins)):
             if distance_mins[i] < thres:
-                p = protein_atoms[i]
+                p = self[i]
                 pocket_res.add((p['chainID'], p['resSeq']))
         pocket_atoms = PDBAtoms()
-        for atom in protein_atoms:
+        for atom in self:
             if (atom['chainID'], atom['resSeq']) in pocket_res:
                 pocket_atoms.append(atom)
         return pocket_atoms
+
+    def get_pocket_exclusive(self, ligand_atoms, thres=10.0):
+        pocket_atoms = PDBAtoms()
+        for residue in self.get_residues():
+            distance_matrix = ligand_atoms.get_distance_matrix(residue)
+            d = distance_matrix.min(axis=0)
+            if np.all(d < thres):
+                pocket_atoms += residue
+        return pocket_atoms
+
+    def get_pocket(self, ligand_atoms, thres=5.0, method='inclusive'):
+        assert method in ['inclusive', 'exclusive']
+        if method == 'inclusive':
+            return self.get_pocket_inclusive(ligand_atoms, thres=thres)
+        else:
+            return self.get_pocket_exclusive(ligand_atoms, thres=thres)
 
     def get_distance_matrix(self, other):
         coords1 = np.array([(a['x'], a['y'], a['z']) for a in self])
