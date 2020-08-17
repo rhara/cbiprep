@@ -5,6 +5,7 @@ For the time being, please use Jupyter notebooks.
 ### LOG
 
 ```
+ver 0.1.29                              - subtle changes
 ver 0.1.28  Dataset.ipynb               - fixed
 ver 0.1.27  cbipre/atomtyper.py         - added GetAtomTypes function
 ver 0.1.26  Maserati.ipynb              - output is compact tarball

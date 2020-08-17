@@ -160,7 +160,7 @@ class PDBAtoms(list):
                 protein_atoms.append(atom)
         return protein_atoms
 
-    def get_relevant_protein(self, ligand_atoms, thres=5.0):
+    def get_interacting_chains(self, ligand_atoms, thres=5.0):
         protein_atoms = self.get_protein()
         distance_matrix = protein_atoms.get_distance_matrix(ligand_atoms)
         distance_mins = distance_matrix.min(axis=1)
